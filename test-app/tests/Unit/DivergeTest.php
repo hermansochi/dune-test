@@ -29,6 +29,7 @@ class DivergeCheckerTest extends TestCase
     {
         $result = $this->object->setThreshold(15.5);
         $this->assertInstanceOf(DivergeChecker::class, $result);
+        $this->assertNotEmpty($result);
     }
     public function test_set_invalid_threshold()
     {
