@@ -40,22 +40,22 @@ api-permissions:
 api-composer-install:
 	docker compose run --rm api-php-cli composer install
 
-api-tests:
+tests:
 	docker compose run --rm api-php-cli php artisan test
 
-api-test:
+test:
 	docker compose run --rm api-php-cli ./vendor/bin/phpunit
 
-api-tests-coverage:
+tests-coverage:
 	docker compose run --rm api-php-cli vendor/bin/phpunit --coverage-html reports/
 
-api-psalm:
+psalm:
 	docker compose run --rm api-php-cli ./vendor/bin/psalm --show-info=true
 
-api-lint:
+lint:
 	docker compose run --rm api-php-cli ./vendor/bin/pint
 
-api-analyze:
+analyze:
 	docker compose run --rm api-php-cli ./vendor/bin/psalm
 
 

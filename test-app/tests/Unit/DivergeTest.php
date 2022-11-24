@@ -3,26 +3,37 @@
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use App\Services\DivergeCheck;
+use App\Services\DivergeChecker;
 
-class DivergeCheckTest extends TestCase
+class DivergeCheckerTest extends TestCase
 {
     /**
-     * A basic unit test example.
+     * 
+     * @var DivergeCheck $object
+     * 
+     */
+    private DivergeChecker $object;
+
+    protected function setUp(): void
+    {
+        $this->object = new DivergeChecker();
+    }
+
+    /**
+     * Так как в задании просили валидатор, то буду считать что в сервис приходят уже валидные данные
+     * и не особо дублировать функционал feature тестов.
      *
      * @return void
      */
-    public function test_create_valid_object_with_valid_constructor_args()
+    public function test_set_valid_threshold(): void
     {
-        $mock = $this->getMockBuilder(DivergeCheck::class)
-            ->setConstructorArgs([6.66])
-            ->getMock();
-        $this->assertInstanceOf(DivergeCheck::class, $mock);
-        $this->assertEquals('6.66', $mock);
+        $result = $this->object->setThreshold(15.5);
+        $this->assertInstanceOf(DivergeChecker::class, $result);
     }
-    public function test_create_invalid_object()
+    public function test_set_invalid_threshold()
     {
-        $valid = new DivergeCheck('6.66');
+        $result = $this->object->setThreshold('1f5.5');
+        $this->assertInstanceOf(DivergeChecker::class, $result);
       
     }
 }

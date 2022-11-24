@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 
-class InsufficientDataForDev extends Exception
+class DivergeException extends Exception
 {
     /**
      * Report or log an exception.
