@@ -14,8 +14,8 @@
 
 5. make analyze - стат. анализ Psalm
 
-##Tests:
+## Tests:
 
 
-##Stat analyze:
+## Stat analyze:
 
