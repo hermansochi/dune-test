@@ -11,3 +11,11 @@
 3. make test  - unit и functional тесты с традиционным выводом PHPUnit.
 
 4. make tests - unit и functional тесты с выводом в Laravel стиле.
+
+5. make analyze - стат. анализ Psalm
+
+##Tests:
+
+
+##Stat analyze:
+
