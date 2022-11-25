@@ -17,5 +17,7 @@
 ## Tests:
 ![test1](https://github.com/hermansochi/dune-test/raw/master/asserts/test.png)
 
-## Stat analyze:
+![test2](https://github.com/hermansochi/dune-test/raw/master/asserts/tests.png)
 
+## Stat analyze:
+![psalm](https://github.com/hermansochi/dune-test/raw/master/asserts/psalm.png)
