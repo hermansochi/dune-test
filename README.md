@@ -15,7 +15,7 @@
 5. make analyze - стат. анализ Psalm
 
 ## Tests:
-
+![test1](https://github.com/hermansochi/dune-test/raw/master/asserts/test.png)
 
 ## Stat analyze:
 
