@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\Diverg;
+use Illuminate\Foundation\Http\FormRequest;
 
 class ChangePrice extends FormRequest
 {
@@ -25,7 +27,7 @@ class ChangePrice extends FormRequest
     public function rules()
     {
         return [
-            'price'=>['required', new Diverg()]
+            'price' => ['required', new Diverg()],
         ];
     }
 }

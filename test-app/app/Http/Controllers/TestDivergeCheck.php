@@ -1,25 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\ChangePrice;
+use Illuminate\Http\Request;
 
 class TestDivergeCheck extends Controller
 {
-
     /**
-     * 
      * Inject custom request validator
-     * 
-     * @param App\Http\Requests\ChangePrice $request
+     *
+     * @param  ChangePrice  $request
      * @return void
-     * 
      */
     public function __construct(ChangePrice $request)
     {
         //
     }
+
     /**
      * Check resource. Fake store.
      *
@@ -30,5 +30,4 @@ class TestDivergeCheck extends Controller
     {
         return $request->input();
     }
-
 }

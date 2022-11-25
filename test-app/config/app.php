@@ -9,14 +9,13 @@ return [
     | Custom app parameters
     |--------------------------------------------------------------------------
     |
-    | 
-    | 
-    | 
+    |
+    |
+    |
     |
     */
 
     'default_threshold' => env('DEFAULT_THRESHOLD', 50),
-
 
     /*
     |--------------------------------------------------------------------------
@@ -208,9 +207,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-        /** herman */
-        //App\Providers\DivergeCheckerProvider::class
 
     ],
 

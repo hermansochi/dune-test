@@ -2,15 +2,16 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use App\Exceptions\DivergeException;
 use App\Services\DivergeChecker;
+use PHPUnit\Framework\TestCase;
 
 class DivergeCheckerTest extends TestCase
 {
     /**
-     * 
-     * @var DivergeCheck $object
-     * 
+     * Тестируемый объект
+     *
+     * @var DivergeCheck
      */
     private DivergeChecker $object;
 
@@ -20,8 +21,7 @@ class DivergeCheckerTest extends TestCase
     }
 
     /**
-     * Так как в задании просили валидатор, то буду считать что в сервис приходят уже валидные данные
-     * и не особо дублировать функционал feature тестов.
+     * Создание объекта. Тест не имеет особого смысла )
      *
      * @return void
      */
@@ -31,10 +31,75 @@ class DivergeCheckerTest extends TestCase
         $this->assertInstanceOf(DivergeChecker::class, $result);
         $this->assertNotEmpty($result);
     }
-    public function test_set_invalid_threshold()
+
+    /**
+     * Пытаемся установить нулевой порог
+     *
+     * @return void
+     */
+    public function test_set_zero_threshold(): void
     {
-        $result = $this->object->setThreshold('1f5.5');
-        $this->assertInstanceOf(DivergeChecker::class, $result);
-      
+        $this->expectException(DivergeException::class);
+        $this->object->setThreshold(0);
+    }
+
+    /**
+     * Пытаемся установить отрицательный порог
+     *
+     * @return void
+     */
+    public function test_set_negative_threshold(): void
+    {
+        $this->expectException(DivergeException::class);
+        $this->object->setThreshold(0);
+    }
+
+    /**
+     * Пытаемся установить отрицательную новую цену
+     *
+     * @return void
+     */
+    public function test_set_negative_new_price(): void
+    {
+        $this->expectException(DivergeException::class);
+        $result = $this->object->setThreshold(10)->diffPrice(-100, 10);
+    }
+
+    /**
+     * Пытаемся установить отрицательную старую цену
+     *
+     * @return void
+     */
+    public function test_set_negative_old_price(): void
+    {
+        $this->expectException(DivergeException::class);
+        $result = $this->object->setThreshold(10)->diffPrice(100, -10);
+    }
+
+    /**
+     * Порог превышен позитивно
+     *
+     * @return void
+     */
+    public function test_threshold_is_positive_over(): void
+    {
+        $result = $this->object->setThreshold(10)->diffPrice(100, 10);
+        $this->assertTrue($result);
+        $dev = $this->object->getDeviation();
+        $this->assertEquals(900, $dev);
+    }
+
+    /**
+     * Порог превышен негативно
+     * Возможно тест не пройдет в другом окружении из за разницы в округлении
+     *
+     * @return void
+     */
+    public function test_threshold_is_negative_over(): void
+    {
+        $result = $this->object->setThreshold(10)->diffPrice(6.66, 11);
+        $this->assertTrue($result);
+        $dev = $this->object->getDeviation();
+        $this->assertEquals(-39.45, round($dev, 2));
     }
 }

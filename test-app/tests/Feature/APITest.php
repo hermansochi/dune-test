@@ -3,24 +3,26 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
+/**
+ * Набор тестов, проверяющих сервис DivergeChecker в окружении всего приложения.
+ */
 class APITest extends TestCase
 {
     /**
-     * Get QR code for non existent employee.
+     * Корректный запрос.
      *
      * @return void
      */
-    public function test_the_api_returns_a_successful_response()
+    public function test_the_api_returns_a_successful_response(): void
     {
         $response = $this->json('POST', '/api/v1/checks', [
             'price' => [
                 'threshold' => 50,
                 'new' => 105,
                 'out' => 200,
-            ]
+            ],
         ]);
 
         $response
@@ -31,7 +33,7 @@ class APITest extends TestCase
                     'threshold' => 50,
                     'new' => 105,
                     'out' => 200,
-                ]
+                ],
             ]);
     }
 
@@ -41,7 +43,7 @@ class APITest extends TestCase
             'price' => [
                 'new' => 105,
                 'out' => 200,
-            ]
+            ],
         ]);
 
         $response
@@ -51,7 +53,7 @@ class APITest extends TestCase
                 'price' => [
                     'new' => 105,
                     'out' => 200,
-                ]
+                ],
             ]);
     }
 
@@ -62,7 +64,7 @@ class APITest extends TestCase
                 'threshold' => '5k0',
                 'new' => 50.14,
                 'out' => 2000.99,
-            ]
+            ],
         ]);
 
         $response
@@ -81,7 +83,7 @@ class APITest extends TestCase
                 'threshold' => -5,
                 'new' => 50.14,
                 'out' => 2000.99,
-            ]
+            ],
         ]);
 
         $response
@@ -99,7 +101,7 @@ class APITest extends TestCase
             'price' => [
                 'new' => '50r.14',
                 'out' => 2000.99,
-            ]
+            ],
         ]);
 
         $response
@@ -117,7 +119,7 @@ class APITest extends TestCase
             'price' => [
                 'new' => '-50.14',
                 'out' => 2000.99,
-            ]
+            ],
         ]);
 
         $response
@@ -135,7 +137,7 @@ class APITest extends TestCase
             'price' => [
                 'new' => 50.14,
                 'out' => '2d000.99',
-            ]
+            ],
         ]);
 
         $response
@@ -153,7 +155,7 @@ class APITest extends TestCase
             'price' => [
                 'new' => 50.14,
                 'out' => -2000.99,
-            ]
+            ],
         ]);
 
         $response
@@ -172,7 +174,7 @@ class APITest extends TestCase
                 'threshold' => 10,
                 'new' => 500,
                 'out' => 200,
-            ]
+            ],
         ]);
 
         $response
@@ -183,6 +185,7 @@ class APITest extends TestCase
                 'errors' => ['price' => true],
             ]);
     }
+
     public function test_the_new_price_is_lower_threshold()
     {
         $response = $this->json('POST', '/api/v1/checks', [
@@ -190,7 +193,7 @@ class APITest extends TestCase
                 'threshold' => 10,
                 'new' => 5,
                 'out' => 200,
-            ]
+            ],
         ]);
 
         $response
@@ -201,13 +204,14 @@ class APITest extends TestCase
                 'errors' => ['price' => true],
             ]);
     }
+
     public function test_the_new_price_is_over_default_threshold()
     {
         $response = $this->json('POST', '/api/v1/checks', [
             'price' => [
                 'new' => 5000.12,
                 'out' => 200.11,
-            ]
+            ],
         ]);
 
         $response
@@ -218,13 +222,14 @@ class APITest extends TestCase
                 'errors' => ['price' => true],
             ]);
     }
+
     public function test_the_new_price_is_lower_default_threshold()
     {
         $response = $this->json('POST', '/api/v1/checks', [
             'price' => [
                 'new' => 50.14,
                 'out' => 2000.99,
-            ]
+            ],
         ]);
 
         $response
@@ -235,5 +240,4 @@ class APITest extends TestCase
                 'errors' => ['price' => true],
             ]);
     }
-
 }

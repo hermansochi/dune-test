@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Exceptions;
 
 use Exception;
@@ -13,6 +15,6 @@ class DivergeException extends Exception
      */
     public function report(): void
     {
-        \Log::debug('Insufficient data for check deviation. Call method diffPrice before getDeviation.');
+        \Log::debug($this->getMessage());
     }
 }
